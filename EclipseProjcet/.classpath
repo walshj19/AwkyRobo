@@ -6,13 +6,10 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="core.jar"/>
-	<classpathentry kind="lib" path="SimpleOpenNI.jar"/>
-	<classpathentry kind="lib" path="core/library/gluegen-rt-natives-windows-amd64.jar"/>
-	<classpathentry kind="lib" path="core/library/gluegen-rt-natives-windows-i586.jar"/>
+	<classpathentry kind="lib" path="core/library/core.jar"/>
+	<classpathentry kind="lib" path="core/library/gluegen-rt-natives-macosx-universal.jar"/>
 	<classpathentry kind="lib" path="core/library/gluegen-rt.jar"/>
-	<classpathentry kind="lib" path="core/library/jogl-all-natives-windows-amd64.jar"/>
-	<classpathentry kind="lib" path="core/library/jogl-all-natives-windows-i586.jar"/>
+	<classpathentry kind="lib" path="core/library/jogl-all-natives-macosx-universal.jar"/>
 	<classpathentry kind="lib" path="core/library/jogl-all.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
