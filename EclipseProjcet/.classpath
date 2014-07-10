@@ -11,5 +11,6 @@
 	<classpathentry kind="lib" path="core/library/gluegen-rt.jar"/>
 	<classpathentry kind="lib" path="core/library/jogl-all-natives-macosx-universal.jar"/>
 	<classpathentry kind="lib" path="core/library/jogl-all.jar"/>
+	<classpathentry kind="lib" path="core/library/SimpleOpenNI.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

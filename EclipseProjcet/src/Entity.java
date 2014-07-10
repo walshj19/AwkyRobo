@@ -7,8 +7,7 @@ public class Entity {
 	
 	public Entity(PApplet applet){
 		this.parent = applet;
-		//openNI = new SimpleOpenNI(this);
-
+		openNI = new SimpleOpenNI(parent);
 	}
 	
 	public void draw(){
