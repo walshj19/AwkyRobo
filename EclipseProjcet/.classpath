@@ -12,5 +12,9 @@
 	<classpathentry kind="lib" path="core/library/jogl-all-natives-macosx-universal.jar"/>
 	<classpathentry kind="lib" path="core/library/jogl-all.jar"/>
 	<classpathentry kind="lib" path="core/library/SimpleOpenNI.jar"/>
+	<classpathentry kind="lib" path="core/library/gluegen-rt-natives-windows-amd64.jar"/>
+	<classpathentry kind="lib" path="core/library/gluegen-rt-natives-windows-i586.jar"/>
+	<classpathentry kind="lib" path="core/library/jogl-all-natives-windows-amd64.jar"/>
+	<classpathentry kind="lib" path="core/library/jogl-all-natives-windows-i586.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
