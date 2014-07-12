@@ -16,7 +16,7 @@ public class SimpleOpenNI_User_eclipse extends PApplet{
 	  context.enableDepth();
 	  
 	  // enable skeleton generation for all joints
-	  context.enableUser(context.SKEL_PROFILE_ALL);
+	  context.enableUser();
 	 
 	  background(200,0,0);
 

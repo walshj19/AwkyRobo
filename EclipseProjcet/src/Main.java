@@ -1,69 +1,77 @@
 import processing.core.*;
+import processing.event.*;
 
 public class Main extends PApplet{
+	final int WIDTH = 800;
+	final int HEIGHT = 800;
+	
+	float cameraX = width/2;
+	float cameraY = height/2;
+	int mouseDraggedX = 0;
+	int mouseDraggedY = 0;
+	float zoom = 1;
+	
 	int locationX = 100;
 	int locationY = 100;
 	int size = 50;
 	int speed = 0;
 
 	public void setup() {
-		size(800,800, P3D);
+		size(WIDTH, HEIGHT, P3D);
 		background(0);
+		smooth(8);
+		textSize(10);
 	}
 	
 	public void draw() {
+		//print some textual info
+		text("camera x = "+cameraX, 2, 2);
+		text("camera y = "+cameraY, 2, 22);
+		
+		//lights, camera
 		lights();
+		ambientLight(255, 255, 255);
 		background(0);
-		camera(mouseX, mouseY, (height/2) / tan(PI/6), mouseX, mouseY, 0, 0, 1, 0);
-		translate(width/2, height/2, -100);
+		camera(cameraX, cameraY, (height/2) / tan(PI/6) * zoom, (width/2.0f)+200, (height/2.0f)+200, 0, 0, 1, 0);
 		stroke(255);
-		sphereDetail(15);
-		//noFill();
-		//box(200);
-		
-		//setup the sides of a box as squares
 		fill(51);
-		stroke(255);
-		//back
-		pushMatrix();
+		sphereDetail(15);
+		//stroke(random(255), random(255), random(255));
 
-		translate(200, 200, 0);
-		stroke(random(255), random(255), random(255));
+		pushMatrix();
+		translate(width/2, height/2, 0);
 		
-		float x1 = random(size);
-		float y1 = random(size);
+		//draw the axes
 		
-		//l1 -> l2 is horizontal
-		float x2 = x1;
-		float y2 = random(size);
 		
-		float x3 = random(size);
-		float y3 = y2;
 		
-		float x4 = x3;
-		float y4 = random(size);
 		
-		float x5 = random(size);
-		float y5 = y4;
-		
-		line(locationX+x1, locationY+y1, locationX+x2, locationY+y2);
-		line(locationX+x2, locationY+y2, locationX+x3, locationY+y3);
-		line(locationX+x3, locationY+y3, locationX+x4, locationY+y4);
-		line(locationX+x4, locationY+y4, locationX+x5, locationY+y5);
-		popMatrix();
-		
+		//action
 		//left
 		pushMatrix();
-		translate(200, 200, 0);
+		new Entity(this).draw();
+		rect(0, 0, 200, 200);
+		line(0,200,0, -200,200,0);
+		popMatrix();
+		
+		//right
+		pushMatrix();
+		translate(200, 0, 0);
 		rotateY(radians(270));
-		drawSphereGrid(10, 10);
+		//drawSphereGrid(10, 10);
+		rect(0, 0, 200, 200);
+		line(0,0,0, 0,-200,0);
 		popMatrix();
 		
 		//bottom
 		pushMatrix();
-		translate(200, 400, 0);
+		translate(0, 200, 0);
 		rotateX(radians(90));
-		drawSphereGrid(10, 10);
+		//drawSphereGrid(10, 10);
+		rect(0, 0, 200, 200);
+		line(200,0,0, 200,400,0);
+		popMatrix();
+		
 		popMatrix();
 	}
 	
@@ -86,6 +94,27 @@ public class Main extends PApplet{
 			}
 			popMatrix();
 		}
+	}
+	
+	/**
+	 * Detects mouse scroll events to zoom the camera
+	 */
+	public void mouseWheel(MouseEvent event) {
+		float temp = zoom + event.getCount() * 0.1f;
+		if (temp > 0) {
+			zoom = temp;
+		}
+	}
+	
+	public void mouseDragged(MouseEvent event){
+		println("mouse dragged x = "+event.getX());
+		println("mouse dragged y = "+event.getY());
+		if (mouseDraggedX != 0 && mouseDraggedY != 0) {
+			cameraX += event.getX() - mouseDraggedX;
+			cameraY += event.getY() - mouseDraggedY;
+		}
+		mouseDraggedX = event.getX();
+		mouseDraggedY = event.getY();
 	}
 	
 	/**
