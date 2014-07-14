@@ -15,6 +15,8 @@ public class Main extends PApplet{
 	int locationY = 100;
 	int size = 50;
 	int speed = 0;
+	
+	Entity first = new Entity(this);
 
 	public void setup() {
 		size(WIDTH, HEIGHT, P3D);
@@ -24,15 +26,13 @@ public class Main extends PApplet{
 	}
 	
 	public void draw() {
-		//print some textual info
-		text("camera x = "+cameraX, 2, 2);
-		text("camera y = "+cameraY, 2, 22);
-		
 		//lights, camera
 		lights();
 		ambientLight(255, 255, 255);
 		background(0);
 		camera(cameraX, cameraY, (height/2) / tan(PI/6) * zoom, (width/2.0f)+200, (height/2.0f)+200, 0, 0, 1, 0);
+		//text("camera x = "+cameraX, mouseX, mouseY);
+		//text("camera y = "+cameraY, 2, 22);
 		stroke(255);
 		fill(51);
 		sphereDetail(15);
@@ -44,7 +44,7 @@ public class Main extends PApplet{
 		//action
 		//left
 		pushMatrix();
-		//new Entity(this).draw();
+		first.draw();
 		rect(0, 0, 200, 200);
 		line(0,200,0, -200,200,0);
 		popMatrix();
