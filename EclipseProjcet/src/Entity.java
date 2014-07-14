@@ -3,15 +3,15 @@ import processing.core.PApplet;
 public class Entity {
 	PApplet parent;
 	
-	int x = 50;
-	int y = 50;
-	int size = 20;
+	float x = 50;
+	float y = 50;
+	float size = 20;
 	
 	public Entity(PApplet applet){
 		this.parent = applet;
 	}
 	
-	public void draw(){
+	private void squiggles(){
 		float x1 = parent.random(size);
 		float y1 = parent.random(size);
 		
@@ -32,5 +32,17 @@ public class Entity {
 		parent.line(x+x2, y+y2, x+x3, y+y3);
 		parent.line(x+x3, y+y3, x+x4, y+y4);
 		parent.line(x+x4, y+y4, x+x5, y+y5);
+	}
+	
+	/**
+	 * A collection of spheres orbiting each other.
+	 */
+	private void spheres(){
+		parent.ellipse(x, y, size, size);
+	}
+	
+	public void draw(){
+		//squiggles();
+		spheres();
 	}
 }

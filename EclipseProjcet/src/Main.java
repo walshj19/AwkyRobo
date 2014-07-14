@@ -41,15 +41,10 @@ public class Main extends PApplet{
 		pushMatrix();
 		translate(width/2, height/2, 0);
 		
-		//draw the axes
-		
-		
-		
-		
 		//action
 		//left
 		pushMatrix();
-		new Entity(this).draw();
+		//new Entity(this).draw();
 		rect(0, 0, 200, 200);
 		line(0,200,0, -200,200,0);
 		popMatrix();
