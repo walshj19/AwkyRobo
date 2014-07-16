@@ -4,8 +4,8 @@ public class Entity {
 	PApplet parent;
 	
 	float x = 100;
-	float y = 100;
-	float size = 50;
+	float y = 300;
+	float size = 70;
 	
 	//for spheres
 	float theta = 0;
@@ -16,13 +16,18 @@ public class Entity {
 	float yAxisOffset;
 	float zAxisOffset;
 	
-	public Entity(PApplet applet){
+	public Entity(PApplet applet, float x, float y){
 		this.parent = applet;
 		
-		x = parent.width/2;
-		y = parent.height/2;
+		this.x = x;
+		this.y = y;
 		
 		xAxisOffset = parent.random(0, 2*parent.PI);
+	}
+	
+	public int plusTen (int original){
+		int result = original + 10;
+		return result;
 	}
 	
 	private void squiggles(){
@@ -48,10 +53,62 @@ public class Entity {
 		parent.line(x+x4, y+y4, x+x5, y+y5);
 	}
 	
+	private void pipes(){
+		float width = 10;
+		float size = 150;
+		
+		float s1Length = parent.random(size/2, size);
+		float s2Length = parent.random(size/2, size);
+		float s3Length = parent.random(size/2, size);
+		float s4Length = parent.random(size/2, size);
+		float s5Length = parent.random(size/2, size);
+		
+		//s1Length = s2Length = s3Length = s4Length = s5Length = 70;
+		
+		float x1 = parent.width/2;
+		float y1 = parent.height/2;
+		float z1 = 0;
+		
+		float angle = parent.random(2*parent.PI);
+		
+		parent.pushMatrix();
+		
+		//translate to the middle of the first segment
+		parent.translate(x1, y1, z1);
+		parent.rotateZ(angle);
+		parent.rotateY(angle);
+		parent.box(width, width, s1Length);
+		parent.pushMatrix();
+		
+		//draw one end
+		parent.translate(0, -((s2Length/2)-(width/2)), (s1Length/2)+(width/2));
+		parent.rotateX(parent.radians(90));
+		parent.box(width, width, s2Length);
+		
+		parent.translate(0, ((s3Length/2)-(width/2)), (s2Length/2)+(width/2));
+		parent.rotateX(parent.radians(90));
+		parent.box(width, width, s3Length);
+		
+		//go back to the middle
+		parent.popMatrix();
+		
+		//draw the other end
+		parent.translate(0, ((s4Length/2)-(width/2)), -(s1Length/2)+(width/2));
+		parent.rotateX(parent.radians(90));
+		parent.box(width, width, s4Length);
+		
+		parent.translate(0, -((s5Length/2)-(width/2)), -(s4Length/2)+(width/2));
+		parent.rotateX(parent.radians(90));
+		parent.box(width, width, s5Length);
+		
+		parent.popMatrix();
+		//parent.popMatrix();
+	}
+	
 	/**
 	 * A collection of spheres orbiting each other.
 	 */
-	private void spheres(){
+	void spheres(){
 		//parent.ellipse(x, y, size, size);
 		theta += 0.02;
 		theta %= 2*parent.PI;
@@ -68,7 +125,7 @@ public class Entity {
 		//draw the sphere
 		parent.pushMatrix();
 		parent.translate(posX, posY);
-		parent.fill(255);
+		parent.fill(0);
 		parent.sphere(5);
 		parent.popMatrix();
 		
@@ -82,6 +139,7 @@ public class Entity {
 	
 	public void draw(){
 		//squiggles();
-		spheres();
+		//spheres();
+		pipes();
 	}
 }

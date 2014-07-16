@@ -16,7 +16,7 @@ public class Main extends PApplet{
 	int size = 50;
 	int speed = 0;
 	
-	Entity first = new Entity(this);
+	Entity first = new Entity(this, 100, 200);
 
 	public void setup() {
 		size(WIDTH, HEIGHT, P3D);
