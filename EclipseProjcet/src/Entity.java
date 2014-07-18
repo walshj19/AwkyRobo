@@ -25,11 +25,6 @@ public class Entity {
 		xAxisOffset = parent.random(0, 2*parent.PI);
 	}
 	
-	public int plusTen (int original){
-		int result = original + 10;
-		return result;
-	}
-	
 	private void squiggles(){
 		float x1 = parent.random(size);
 		float y1 = parent.random(size);
@@ -103,6 +98,10 @@ public class Entity {
 		
 		parent.popMatrix();
 		//parent.popMatrix();
+	}
+	
+	private void fractal2d(){
+		
 	}
 	
 	/**
