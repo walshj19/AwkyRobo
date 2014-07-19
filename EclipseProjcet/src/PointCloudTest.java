@@ -19,6 +19,7 @@ public class PointCloudTest extends PApplet {
 	
 	public void draw() {
 		background(0);
+		text(frameRate, 50, 50);
 		kinect.update();
 		PImage rgbImage = kinect.rgbImage();
 		
@@ -44,7 +45,9 @@ public class PointCloudTest extends PApplet {
 			PVector currentPoint = depthPoints[i];
 			stroke(rgbImage.pixels[i]);
 			// draw the current point
-			point(currentPoint.x, currentPoint.y, currentPoint.z);
+			if(currentPoint.z == 0 || currentPoint.z < 2000){
+				//point(currentPoint.x, currentPoint.y, currentPoint.z);
+			}
 		}
 		
 		// We're ready to draw the cube 4
@@ -55,6 +58,6 @@ public class PointCloudTest extends PApplet {
 		// leave the box unfilled so we can see through it
 		noFill();
 		// draw the box
-		box(boxSize);
+		//box(boxSize);
 	}
 }
