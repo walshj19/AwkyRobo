@@ -22,10 +22,11 @@ public class Entity {
 		this.x = x;
 		this.y = y;
 		
-		xAxisOffset = parent.random(0, 2*parent.PI);
+		//xAxisOffset = parent.random(0, 2*parent.PI);
 	}
 	
-	private void squiggles(){
+	public void squiggles(){
+		parent.stroke(parent.random(40), parent.random(180), 100);
 		float x1 = parent.random(size);
 		float y1 = parent.random(size);
 		
@@ -137,8 +138,8 @@ public class Entity {
 	}
 	
 	public void draw(){
-		//squiggles();
+		squiggles();
 		//spheres();
-		pipes();
+		//pipes();
 	}
 }

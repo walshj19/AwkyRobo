@@ -7,6 +7,7 @@ public class PointCloudTest extends PApplet {
 	float rotation = 0;
 	int boxSize = 150;
 	PVector boxCenter = new PVector(0, 0, 600);
+	int crowd = 0;
 	
 	public void setup() {
 		size(1024, 768, OPENGL);
@@ -19,7 +20,10 @@ public class PointCloudTest extends PApplet {
 	
 	public void draw() {
 		background(0);
-		text(frameRate, 50, 50);
+		text("frame rate "+frameRate, 50, 50);
+		text("crowd "+crowd, 50, 30);
+		float val = map(crowd, 0, 150000, 0, width);
+		rect(50, 60, val, 10);
 		kinect.update();
 		PImage rgbImage = kinect.rgbImage();
 		
@@ -40,13 +44,15 @@ public class PointCloudTest extends PApplet {
 		// get the depth data as 3D points
 		PVector[] depthPoints = kinect.depthMapRealWorld();
 		
+		crowd = 0;
 		for(int i = 0; i < depthPoints.length; i+=2){
 			// get the current point from the point array
 			PVector currentPoint = depthPoints[i];
 			stroke(rgbImage.pixels[i]);
 			// draw the current point
 			if(currentPoint.z == 0 || currentPoint.z < 2000){
-				//point(currentPoint.x, currentPoint.y, currentPoint.z);
+				crowd++;
+				point(currentPoint.x, currentPoint.y, currentPoint.z);
 			}
 		}
 		
