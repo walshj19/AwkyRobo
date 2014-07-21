@@ -2,7 +2,8 @@ import processing.core.*;
 
 
 public class EntityTest extends PApplet {
-	Entity first;
+	Entity[] entities;
+	final int NUMBER_OF_ENTITIES = 5;
 	
 	int x = 7;
 	long a;
@@ -17,12 +18,18 @@ public class EntityTest extends PApplet {
 	public void setup(){
 		size(800, 800, P3D);
 		frameRate(30);
-		first = new Entity(this, 200, 200);
+		entities = new Entity[NUMBER_OF_ENTITIES];
+		for(int i = 0; i < entities.length; i++){
+			entities[i] = new Entity(this);
+		}
 	}
 	
 	public void draw(){
-		camera(mouseX, mouseY, (height/2) / tan(PI/6), width/2.0f, height/2.0f, 0, 0, 1, 0);
-		background(255);
-		first.draw();
+		//camera(mouseX, mouseY, (height/2) / tan(PI/6), width/2.0f, height/2.0f, 0, 0, 1, 0);
+		background(0);
+		for(int i = 0; i < entities.length; i++){
+			entities[i].draw();
+			entities[i].updatePosition();
+		}
 	}
 }

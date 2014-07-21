@@ -4,13 +4,11 @@ public class Entity {
 	PApplet parent;
 	
 	//basic properties
-	float x = 100;
-	float y = 300;
+	float x, y;
 	float size = 70;
 	
 	//movement vector
-	float dx;
-	float dy;
+	float dx, dy;
 	
 	//for spheres
 	float theta = 0;
@@ -21,11 +19,14 @@ public class Entity {
 	float yAxisOffset;
 	float zAxisOffset;
 	
-	public Entity(PApplet applet, float x, float y){
+	public Entity(PApplet applet){
 		this.parent = applet;
 		
-		this.x = x;
-		this.y = y;
+		this.x = parent.random(0, parent.width);
+		this.y = parent.random(0, parent.height);
+		
+		this.dx = parent.random(5, 10);
+		this.dy = parent.random(5, 10);
 		
 		//xAxisOffset = parent.random(0, 2*parent.PI);
 	}
@@ -52,6 +53,10 @@ public class Entity {
 		parent.line(x+x2, y+y2, x+x3, y+y3);
 		parent.line(x+x3, y+y3, x+x4, y+y4);
 		parent.line(x+x4, y+y4, x+x5, y+y5);
+	}
+	
+	public void square(){
+		parent.rect(x, y, size, size);
 	}
 	
 	private void pipes(){
@@ -152,12 +157,25 @@ public class Entity {
 		this.dy = dy;
 	}
 	
-	void updatePosition(){
-		Temx += dx;
-		y += dy
+	public void updatePosition(){
+		float xTemp = x + dx;
+		float yTemp = y + dy;
+		
+		//check if new values are out of bounds
+		if(xTemp < 0 || xTemp > parent.width-size){
+			dx = -dx;
+		}else{
+			x = xTemp;
+		}
+		if(yTemp < 0 || yTemp > parent.height-size){
+			dy = -dy;
+		}else{
+			y = yTemp;
+		}
 	}
 	
 	public void draw(){
+		//square();
 		squiggles();
 		//spheres();
 		//pipes();

@@ -27,7 +27,7 @@ public class Main extends PApplet{
 		sphereDetail(15);
 		crowd = new CrowdDetector(this);
 		for(int i = 0; i < 10; i++){
-			entities[i] = new Entity(this, random(0, width), random(0, height));
+			entities[i] = new Entity(this);
 		}
 	}
 	
