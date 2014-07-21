@@ -3,9 +3,14 @@ import processing.core.PApplet;
 public class Entity {
 	PApplet parent;
 	
+	//basic properties
 	float x = 100;
 	float y = 300;
 	float size = 70;
+	
+	//movement vector
+	float dx;
+	float dy;
 	
 	//for spheres
 	float theta = 0;
@@ -135,6 +140,21 @@ public class Entity {
 		parent.ellipse(0, 0, size*2, size*2);
 		
 		parent.popMatrix();
+	}
+	
+	void move(float mx, float my){
+		this.x += mx;
+		this.y += my;
+	}
+	
+	void setMovVec(float dx, float dy){
+		this.dx = dx;
+		this.dy = dy;
+	}
+	
+	void updatePosition(){
+		Temx += dx;
+		y += dy
 	}
 	
 	public void draw(){
