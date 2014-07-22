@@ -75,7 +75,7 @@ public class Entity {
 		float y1 = parent.height/2;
 		float z1 = 0;
 		
-		float angle = parent.random(2*parent.PI);
+		float angle = parent.random(2*parent.PI); 
 		
 		parent.pushMatrix();
 		
@@ -157,9 +157,22 @@ public class Entity {
 		this.dy = dy;
 	}
 	
-	public void updatePosition(){
+	public void updatePosition(Entity[] entities){
 		float xTemp = x + dx;
 		float yTemp = y + dy;
+		
+		//calculate the distance from this entity to every other
+		double[] distances = new double[entities.length];
+		for(int i = 0; i < entities.length; i++){
+			Entity current = entities[i];
+			if(current.x == x && current.y == y){continue;}
+			distances[i] = Math.sqrt(Math.pow(x-current.x, 2)+Math.pow(y-current.y, 2));
+			if(distances[i] < 100){
+				size = 20;
+			}else{
+				size = 70;
+			}
+		}
 		
 		//check if new values are out of bounds
 		if(xTemp < 0 || xTemp > parent.width-size){
@@ -175,8 +188,8 @@ public class Entity {
 	}
 	
 	public void draw(){
-		//square();
-		squiggles();
+		square();
+		//squiggles();
 		//spheres();
 		//pipes();
 	}
