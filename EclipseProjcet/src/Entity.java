@@ -1,4 +1,4 @@
-import processing.core.PApplet;
+import processing.core.*;
 
 public class Entity {
 	PApplet parent;
@@ -6,6 +6,8 @@ public class Entity {
 	//basic properties
 	float x, y;
 	float size = 70;
+	
+	public float crowdSize = 0;
 	
 	//movement vector
 	float dx, dy;
@@ -22,8 +24,8 @@ public class Entity {
 	public Entity(PApplet applet){
 		this.parent = applet;
 		
-		this.x = parent.random(0, parent.width);
-		this.y = parent.random(0, parent.height);
+		this.x = parent.random(0, parent.width-size);
+		this.y = parent.random(0, parent.height-size);
 		
 		this.dx = parent.random(5, 10);
 		this.dy = parent.random(5, 10);
@@ -32,7 +34,7 @@ public class Entity {
 	}
 	
 	public void squiggles(){
-		parent.stroke(parent.random(40), parent.random(180), 100);
+		parent.stroke(parent.random(20,60), parent.random(20,200), 120);
 		float x1 = parent.random(size);
 		float y1 = parent.random(size);
 		
@@ -157,12 +159,13 @@ public class Entity {
 		this.dy = dy;
 	}
 	
-	public void updatePosition(Entity[] entities){
+	public void updatePosition(PVector vect){
+		vect = new PVector(0,y);
 		float xTemp = x + dx;
 		float yTemp = y + dy;
 		
 		//calculate the distance from this entity to every other
-		double[] distances = new double[entities.length];
+		/*double[] distances = new double[entities.length];
 		for(int i = 0; i < entities.length; i++){
 			Entity current = entities[i];
 			if(current.x == x && current.y == y){continue;}
@@ -172,8 +175,13 @@ public class Entity {
 			}else{
 				size = 70;
 			}
+		}*/
+		PVector tempVect = new PVector(xTemp, yTemp);
+		if(PVector.dist(tempVect, vect) > PVector.dist(new PVector(x,y), vect) && PVector.dist(tempVect, vect) > crowdSize){
+			dx = -dx;
+			dy = -dy;
+			return;
 		}
-		
 		//check if new values are out of bounds
 		if(xTemp < 0 || xTemp > parent.width-size){
 			dx = -dx;
@@ -185,11 +193,12 @@ public class Entity {
 		}else{
 			y = yTemp;
 		}
+		
 	}
 	
 	public void draw(){
-		square();
-		//squiggles();
+		//square();
+		squiggles();
 		//spheres();
 		//pipes();
 	}
