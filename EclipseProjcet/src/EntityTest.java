@@ -1,13 +1,27 @@
 import processing.core.*;
 
-
 public class EntityTest extends PApplet {
+	final int NUMBER_OF_ENTITIES = 500;
+	final int WIDTH = displayWidth;
+	final int HEIGHT = displayHeight;
+	
 	Entity[] entities;
-	final int NUMBER_OF_ENTITIES = 5000;
 	CrowdDetector detector;
+
+	public int sketchWidth() {
+		return displayWidth;
+	}
+	
+	public int sketchHeight() {
+		return displayHeight;
+	}
+	
+	public String sketchRenderer() {
+		return P3D; 
+	}
 	
 	public void setup(){
-		size(1920, 1080, P2D);
+		//size(WIDTH, HEIGHT, P2D);
 		frameRate(30);
 		detector = new CrowdDetector(this);
 		entities = new Entity[NUMBER_OF_ENTITIES];
@@ -20,9 +34,10 @@ public class EntityTest extends PApplet {
 		background(0);
 		//camera(mouseX, mouseY, (height/2) / tan(PI/6), width/2.0f, height/2.0f, 0, 0, 1, 0);
 		text("frame rate = "+frameRate, 20, 20);
-		float crowdSize = map(detector.getCrowdSize(), 0, 50000, 1920, 0);
+		float crowdSize = map(detector.getCrowdSize(), 0, 50000, width, 0);
 		PVector vect = detector.getAverage();
-		vect = new PVector(map(vect.x,0,640,0,1920), map(vect.y,0,480,0,1080));
+		//PVector vect = new PVector(mouseX, mouseY);
+		vect = new PVector(map(vect.x,0,640,0,width), map(vect.y,0,480,0,height));
 		//vect = new PVector(mouseX, mouseY);
 		for(int i = 0; i < entities.length; i++){
 			entities[i].draw();
