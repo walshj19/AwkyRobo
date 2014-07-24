@@ -4,9 +4,6 @@ import SimpleOpenNI.*;
 
 public class ONITest extends PApplet {
 	SimpleOpenNI kinect;
-	float centerX=0,centerY=0;
-	float maxX=0, maxY=0;
-	float minX=640, minY=480;
 	
 	public void setup(){
 		size(640, 480);
@@ -20,38 +17,43 @@ public class ONITest extends PApplet {
 		
 		ArrayList<PVector> goodPoints = new ArrayList<PVector>(1);
 		int[] depthValues = kinect.depthMap();
+		//for calculating the average
+		double avgX=0, avgY=0;
+		int hits = 0;
+		//for calculating the closest
+		int closest = 2000;
+		PVector closestPoint = new PVector();
 		
 		for(int y = 0; y < 480 ; y++){
 			for(int x = 0; x < 640; x++){
 				int i = x + (y * 640);
 				int currentDepth = depthValues[i];
 				if(currentDepth < 2000 && currentDepth != 0){
-					float color = map(currentDepth, 0, 2000, 255, 0);
-					stroke(color);
-					//point(x, y);
-					centerX = (centerX+x)/2;
-					centerY = (centerY+y)/2;
-					if(x < minX){minX = x;}
-					if(x > maxX){maxX = x;}
-					if(y < minY){minY = y;}
-					if(y > maxY){maxY = y;}
-					goodPoints.add(new PVector(x,y));
-					//System.out.println(x+" : "+y);
+					//don't draw all the points
+					if(i%4 == 0){
+						float color = map(currentDepth, 0, 2000, 255, 0);
+						stroke(color);
+						point(x, y);
+					}
+					
+					//add the current positions to the total
+					avgX += x;
+					avgY += y;
+					hits++;
+					
+					//check for new closest
+					if(currentDepth < closest){
+						closest = currentDepth;
+						closestPoint = new PVector(x,y);
+					}
 				}
 			}
 		}
-		double x=0, y=0;
-		for(PVector vect : goodPoints){
-			x += vect.x;
-			y += vect.y;
-		}
-		x /= goodPoints.size();
-		y /= goodPoints.size();
-		stroke(0);
 		fill(255);
-		ellipse((float)x, (float)y, 50, 50);
+		ellipse((float)avgX/hits, (float)avgY/hits, 50, 50);
+		fill(200);
+		ellipse(closestPoint.x, closestPoint.y, 50, 50);
 		text(frameRate, 10, 20);
-		text(centerX+" : "+centerY, 10, 40);
 		text(goodPoints.size(), 10, 60);
 	}
 }

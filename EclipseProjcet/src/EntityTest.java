@@ -9,19 +9,18 @@ public class EntityTest extends PApplet {
 	CrowdDetector detector;
 
 	public int sketchWidth() {
-		return displayWidth;
+		return WIDTH;
 	}
 	
 	public int sketchHeight() {
-		return displayHeight;
+		return HEIGHT;
 	}
 	
 	public String sketchRenderer() {
-		return P3D; 
+		return P3D;
 	}
 	
 	public void setup(){
-		//size(WIDTH, HEIGHT, P2D);
 		frameRate(30);
 		detector = new CrowdDetector(this);
 		entities = new Entity[NUMBER_OF_ENTITIES];

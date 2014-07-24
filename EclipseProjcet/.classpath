@@ -22,5 +22,6 @@
 	<classpathentry kind="lib" path="Minim/mp3spi1.9.4.jar"/>
 	<classpathentry kind="lib" path="Minim/tritonus_aos.jar"/>
 	<classpathentry kind="lib" path="Minim/tritonus_share.jar"/>
+	<classpathentry kind="lib" path="PeasyCam/peasycam.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
