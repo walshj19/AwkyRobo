@@ -159,8 +159,8 @@ public class Entity {
 		this.dy = dy;
 	}
 	
-	public void updatePosition(PVector vect){
-		vect = new PVector(0,y);
+	public void updatePosition(){
+		PVector vect = new PVector(0,y);
 		float xTemp = x + dx;
 		float yTemp = y + dy;
 		

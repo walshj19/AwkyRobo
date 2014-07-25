@@ -26,7 +26,19 @@ public class CrowdDetector {
 				int current = depthPoints[i];
 				if(current < 2000 && current != 0){
 					crowdSize++;
+					
+					int alpha = 100;
+					//if near an edge
+					if(x < alpha){alpha = x;}
+					if(x > (640-alpha)){alpha = 640-x;}
+					if(y < alpha){alpha = y;}
+					if(y > (480-alpha)){alpha = 480-y;}
+					parent.stroke(255, alpha);
+					if(x%2 == 0){
+						parent.point(PApplet.map(x, 0, 640, 0, parent.width),PApplet.map(y, 0, 480, 0, parent.height));
+					}
 				}
+				
 			}
 		}
 		return crowdSize;
