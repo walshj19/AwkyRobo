@@ -4,11 +4,13 @@ import SimpleOpenNI.*;
 import processing.core.*;
 
 public class CrowdDetector {
+	PApplet parent;
 	SimpleOpenNI kinect;
 	PVector centre = new PVector(0, 0);
 	
 	public CrowdDetector(PApplet context){
-		kinect = new SimpleOpenNI(context);
+		parent = context;
+		kinect = new SimpleOpenNI(parent);
 		kinect.enableDepth();
 	}
 	
@@ -45,6 +47,17 @@ public class CrowdDetector {
 					xTot += x;
 					yTot += y;
 					amount++;
+					
+					int alpha = 100;
+					//if near an edge
+					if(x < alpha){alpha = x;}
+					if(x > (640-alpha)){alpha = 640-x;}
+					if(y < alpha){alpha = y;}
+					if(y > (480-alpha)){alpha = 480-y;}
+					parent.stroke(255, alpha);
+					if(x%2 == 0){
+						parent.point(parent.map(x, 0, 640, 0, parent.width),parent.map(y, 0, 480, 0, parent.height));
+					}
 				}
 			}
 		}

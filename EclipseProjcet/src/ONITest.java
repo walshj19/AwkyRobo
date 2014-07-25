@@ -32,7 +32,7 @@ public class ONITest extends PApplet {
 					//don't draw all the points
 					if(i%4 == 0){
 						float color = map(currentDepth, 0, 2000, 255, 0);
-						stroke(color);
+						stroke(color, 120);
 						point(x, y);
 					}
 					

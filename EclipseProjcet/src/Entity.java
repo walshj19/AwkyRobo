@@ -27,8 +27,8 @@ public class Entity {
 		this.x = parent.random(0, parent.width-size);
 		this.y = parent.random(0, parent.height-size);
 		
-		this.dx = parent.random(5, 10);
-		this.dy = parent.random(5, 10);
+		this.dx = parent.random(-10, 10);
+		this.dy = parent.random(-10, 10);
 		
 		//xAxisOffset = parent.random(0, 2*parent.PI);
 	}
@@ -177,7 +177,7 @@ public class Entity {
 			}
 		}*/
 		PVector tempVect = new PVector(xTemp, yTemp);
-		if(PVector.dist(tempVect, vect) > PVector.dist(new PVector(x,y), vect) && PVector.dist(tempVect, vect) > crowdSize){
+		if(PVector.dist(tempVect, vect) > PVector.dist(new PVector(x,y), vect) && PVector.dist(tempVect, vect) > crowdSize && ((int)parent.random(3))%2 == 1){
 			dx = -dx;
 			dy = -dy;
 			return;
